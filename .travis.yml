@@ -22,7 +22,7 @@ script:
       release_tag=$( [[ "$TRAVIS_TAG" != "" ]] && echo "yes" || echo "no" );
 
       if [[ $release_latest == "yes" || $release_tag == "yes" ]]; then
-  	    docker build --pull -t $(IMAGE_NAME) .;
+        docker build --pull -t $(IMAGE_NAME) .;
       fi;
 
       if [[ $release_latest == "yes" ]]; then
@@ -46,6 +46,6 @@ notifications:
 # whitelist long living branches to avoid testing feature branches twice (as branch and as pull request)
 branches:
   only:
-  - master
-  - /^v[0-9]+\.[0-9]+\.x$/
-  - /^v[0-9]+\.[0-9]+\.[0-9]+$/
+    - master
+    - /^v[0-9]+\.[0-9]+\.x$/
+    - /^v[0-9]+\.[0-9]+\.[0-9]+$/
