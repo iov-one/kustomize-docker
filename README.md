@@ -10,7 +10,7 @@ Working directory is set to `/working/` if you need to mount files.
 
 # Usage
 ## On docker
-If you're making up your own workflow, the image is on [Docker Hub](https://hub.docker.com/r/traherom/kustomize-docker/).
+If you're making up your own workflow, the image is on [Docker Hub](https://hub.docker.com/r/iov-one/kustomize-docker/).
 
 ## End-to-end Usage
 Using the commands shown below, a complete deploy can be run by piping the output of each into the others:
@@ -23,15 +23,15 @@ docker run --rm -i \
     $ENV \
     -w /working/ \
     -v "$(pwd):/working/" \
-    traherom/kustomize-docker \
+    iov-one/kustomize-docker \
     kustomize build /working/overlays/$OVERLAY \
 | docker run --rm -i \
     $ENV \
-    traherom/kustomize-docker \
+    iov-one/kustomize-docker \
     envsubst \
 | docker run --rm -i \
     -v "$KUBECONFIG:/root/.kube/config" \
-    traherom/kustomize-docker \
+    iov-one/kustomize-docker \
     kubectl apply -f -
 ```
 
@@ -44,7 +44,7 @@ ENV=$(env | grep = | grep -v '^_' | sed 's/\([^=]*\)=.*/ -e \1 /' | tr -d '\n')
 
 docker run --rm -i \
     $ENV \
-    traherom/kustomize-docker \
+    iov-one/kustomize-docker \
     envsubst \
     < input_file.yaml \
     > output_file.yaml
@@ -60,7 +60,7 @@ docker run --rm -i \
     $ENV \
     -w /working/ \
     -v "$(pwd):/working/" \
-    traherom/kustomize-docker \
+    iov-one/kustomize-docker \
     kustomize build /working/overlays/$OVERLAY
 ```
 
@@ -76,7 +76,7 @@ If `$KUBECONFIG` is the path to your K8s configuration file (this is the default
 ```bash
 docker run --rm -i \
     -v "$KUBECONFIG:/root/.kube/config" \
-    traherom/kustomize-docker \
+    iov-one/kustomize-docker \
     kubectl apply -f - \
     < input_file.yaml
 ```
